@@ -11,11 +11,9 @@ var svg = d3.select("#chart-area").append("svg")
 var group = svg.append("g")
     .attr("transform", "translate(" + margin.left + ", " + margin.top + ")");
 
-var all_heights = []
 d3.json("data/buildings.json").then((data)=> {
 	data.forEach((d)=>{
 		d.height = +d.height;
-        all_heights.push(d.height)
 	});
 
     height = d3.max(data, (d)=>{return d.height});
