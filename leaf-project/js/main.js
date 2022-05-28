@@ -90,7 +90,7 @@ d3.json("data/data.json").then((data)=>{
 	});
 
 	var years = data.map((d) => {return d.year;});
-	var contin = formattedData[0].map((d) => {return d.continent.charAt(0).toUpperCase() + d.continent;});
+	var contin = formattedData[0].map((d) => {return d.continent.charAt(0).toUpperCase() + d.continent.slice(1);});
 	var continents = [...new Set(contin)];
 
 	color.domain(continents)
@@ -135,20 +135,20 @@ function update(year, data) {
 
 	circles.exit()
     .transition(transition)
-		.attr("fill", (d) => { return color(d.continent.charAt(0).toUpperCase() + d.continent); })
+		.attr("fill", (d) => { return color(d.continent.charAt(0).toUpperCase() + d.continent.slice(1)); })
 		.attr("cx", (d) => { return y(d.income); })
 		.attr("cy", (d) => { return y(d.life_exp); })
 		.attr("r", (d)=>{ return Math.sqrt(area(d.population) / Math.PI);})
         .remove();
 
 	circles.transition(transition)
-		.attr("fill", (d) => { return color(d.continent.charAt(0).toUpperCase() + d.continent); })
+		.attr("fill", (d) => { return color(d.continent.charAt(0).toUpperCase() + d.continent.slice(1)); })
 		.attr("cx", (d) => { return x(d.income); })
 		.attr("cy", (d) => { return y(d.life_exp); })
 		.attr("r", (d)=>{ return Math.sqrt(area(d.population) / Math.PI); })
 
 	circles.enter().append("circle")
-		.attr("fill", (d) => { return color(d.continent.charAt(0).toUpperCase() + d.continent) })
+		.attr("fill", (d) => { return color(d.continent.charAt(0).toUpperCase() + d.continent.slice(1)) })
 		.attr("cx", (d) => { return x(d.income); })
 		.attr("cy", (d) => { return y(d.life_exp); })
 		.attr("r", (d)=>{ return Math.sqrt(area(d.population) / Math.PI); })
